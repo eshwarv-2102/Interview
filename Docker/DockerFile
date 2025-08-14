@@ -1,0 +1,8 @@
+From ubuntu:22.04
+
+RUN apt-get update && apt-get install -ybash
+RUN mkdir -p /app
+COPY script.sh /app/script.sh
+VOLUME ["/app"]
+EXPOSE 8080
+CMD ["/app/script.sh"]
