@@ -1,1 +1,26 @@
+---
+-name : check the current pip version
+ ansible.builtin.shell: "pip --version"
+ register: pip_version_before
+ changed_when: false
 
+ -name: print the current pip version
+  ansible.builtin.debug:
+    msg: "current pip version {{pip_version_before}}
+
+  -name: upgrade the pip version to target version or latest if that target version is not defined
+  ansible.builtin.pip:
+    name: pip
+    state: "{{'latest' if the pip_target_version is not defined else 'present' }}
+    version: {{ pip_target_version }}
+    executable: pip3
+
+    -name: check the updated pip version 
+     ansible.builtin.shell: "pip --version"
+     register: pip_version_after
+      changed_when: false
+
+      -name: Print the updated package  version
+       ansible.builtin.debug:
+        msg: {{ "updated pip version pip_version_after.stdout }}
+     
